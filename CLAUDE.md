@@ -4,20 +4,50 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a WSL (Windows Subsystem for Linux) automated setup script designed for AI developers. The project has been refactored from a single monolithic script into a modular architecture for better maintainability and organization. It installs and configures development tools, programming languages, and AI CLI tools in a Linux environment.
+This is a WSL (Windows Subsystem for Linux) automated setup script designed for AI developers. The project has been refactored from a single monolithic script (2,331 lines) into a clean modular architecture for better maintainability. It provides a one-line installer for easy deployment and features a fully Turkish interface for Turkish developers.
 
-## Core Commands
+### Key Features
+- **One-line installation** via curl/wget
+- **Modular architecture** - 14 files instead of 1 monolithic script
+- **Turkish language support** - All messages and prompts in Turkish
+- **Interactive menus** - User-friendly interface with multi-choice support
+- **Auto-detection** - Package manager and OS detection
+- **PEP 668 compliance** - Handles Python's externally-managed environment
 
-### Running the Main Script
+## Installation Methods
+
+### Quick Installation (Recommended)
+One-line installation that downloads all components and sets up everything:
+
 ```bash
-# Make the script executable
+# Using curl
+curl -fsSL https://raw.githubusercontent.com/altudev/1453-wsl-bash-script/master/install.sh | bash
+
+# Or using wget
+wget -qO- https://raw.githubusercontent.com/altudev/1453-wsl-bash-script/master/install.sh | bash
+```
+
+This installer:
+- Downloads all 13 modular components from GitHub
+- Sets up directory structure in `~/.1453-wsl-setup/`
+- Creates a launcher script for easy access
+- Prompts to run setup immediately (Turkish: "e/E=Evet, Enter=Hayır")
+
+After installation, run:
+```bash
+~/.1453-wsl-setup/1453-setup
+```
+
+### Manual Installation
+Clone repository and run directly:
+```bash
+# Clone repository
+git clone https://github.com/altudev/1453-wsl-bash-script.git
+cd 1453-wsl-bash-script
+
+# Make executable and run
 chmod +x src/linux-ai-setup-script.sh
-
-# Run the script
 ./src/linux-ai-setup-script.sh
-
-# Or run with bash directly
-bash src/linux-ai-setup-script.sh
 ```
 
 ### Script Validation
@@ -35,28 +65,46 @@ shellcheck src/linux-ai-setup-script.sh
 
 The project has been refactored from a 2,331-line monolithic script into a clean modular architecture:
 
+#### Repository Structure
 ```
-src/
-├── linux-ai-setup-script.sh        # Main entry point (52 lines)
-├── linux-ai-setup-script-legacy.sh # Original monolithic script (backup)
+1453-wsl-bash-script/
+├── install.sh                       # One-line installer (Turkish)
+├── fix-crlf.sh                     # CRLF line ending fixer
+├── README.md                       # Project documentation (Turkish)
+├── CLAUDE.md                       # This file - development guide
 │
-├── lib/                            # Core libraries
-│   ├── init.sh                    # CRLF detection and initialization
-│   ├── common.sh                  # Shared utilities (reload_shell_configs, mask_secret)
-│   └── package-manager.sh        # Package manager detection and system updates
-│
-├── config/                         # Configuration files
-│   ├── colors.sh                  # Terminal color definitions
-│   ├── php-versions.sh            # PHP version and extension arrays
-│   └── banner.sh                  # ASCII art and banner display
-│
-└── modules/                        # Feature modules
-    ├── python.sh                  # Python ecosystem (Python, pip, pipx, UV)
-    ├── javascript.sh              # JavaScript ecosystem (NVM, Bun.js)
-    ├── php.sh                     # PHP ecosystem (PHP versions, Composer, Laravel)
-    ├── ai-cli.sh                  # AI CLI tools (Claude Code, Gemini, Qwen, etc.)
-    ├── ai-frameworks.sh           # AI frameworks (SuperGemini, SuperQwen, SuperClaude)
-    └── menus.sh                   # Interactive menu system and main loop
+└── src/
+    ├── linux-ai-setup-script.sh        # Main entry point (52 lines)
+    ├── linux-ai-setup-script-legacy.sh # Original monolithic script (backup)
+    │
+    ├── lib/                            # Core libraries
+    │   ├── init.sh                    # CRLF detection and initialization
+    │   ├── common.sh                  # Shared utilities (reload_shell_configs, mask_secret)
+    │   └── package-manager.sh        # Package manager detection and system updates
+    │
+    ├── config/                         # Configuration files
+    │   ├── colors.sh                  # Terminal color definitions
+    │   ├── php-versions.sh            # PHP version and extension arrays
+    │   └── banner.sh                  # ASCII art and banner display (Turkish)
+    │
+    └── modules/                        # Feature modules
+        ├── python.sh                  # Python ecosystem (Python, pip, pipx, UV)
+        ├── javascript.sh              # JavaScript ecosystem (NVM, Bun.js)
+        ├── php.sh                     # PHP ecosystem (PHP versions, Composer, Laravel)
+        ├── ai-cli.sh                  # AI CLI tools (Claude Code, Gemini, Qwen, etc.)
+        ├── ai-frameworks.sh           # AI frameworks (SuperGemini, SuperQwen, SuperClaude)
+        └── menus.sh                   # Interactive menu system and main loop (Turkish)
+```
+
+#### After Installation (via installer)
+```
+~/.1453-wsl-setup/
+├── 1453-setup                      # Launcher script
+└── src/
+    ├── linux-ai-setup-script.sh    # Main script
+    ├── lib/                        # All library files
+    ├── config/                     # All config files
+    └── modules/                    # All module files
 ```
 
 ### Module Categories
@@ -84,7 +132,15 @@ src/
 
 **Windows WSL Compatibility**: Handles CRLF line endings automatically at startup using `dos2unix`, `sed`, or `tr`.
 
-**Error Handling**: Uses color-coded output (RED for errors, GREEN for success, YELLOW for warnings) with bilingual messages (Turkish/English).
+**Error Handling**: Uses color-coded output (RED for errors, GREEN for success, YELLOW for warnings) with messages primarily in Turkish.
+
+**Language Support**: The interface is fully in Turkish:
+- All prompts and messages in Turkish
+- Menu items in Turkish
+- Error messages and success notifications in Turkish
+- Installation prompts use "e/E=Evet, Enter=Hayır"
+
+**Interactive Prompt Fix**: The installer handles stdin properly when piped through curl/wget using `/dev/tty` redirection for user input.
 
 ## Important Functions
 
@@ -214,7 +270,72 @@ docker run -it ubuntu:latest /bin/bash
 ## Common Issues and Solutions
 
 1. **CRLF Line Endings**: Script auto-fixes on first run
-2. **Permission Denied**: Run `chmod +x` on the script
+2. **Permission Denied**: Run `chmod +x` on the script (installer handles this automatically)
 3. **PEP 668 Errors**: Script handles externally-managed-environment automatically
 4. **Missing Dependencies**: Script installs prerequisites automatically
 5. **Shell Not Reloading**: Script calls `reload_shell_configs()` automatically
+6. **Interactive Prompt in Pipe**: Fixed with `/dev/tty` redirection in installer
+
+## Version History
+
+### v2.0 (Current) - Modular Architecture
+- Refactored from monolithic (2,331 lines) to modular (14 files)
+- Added one-line installer (`install.sh`)
+- Full Turkish language support
+- Fixed interactive prompt issue when piped
+- Fixed GitHub URL references
+- Created comprehensive module structure
+- Added launcher script for easy access
+- Maintained 100% backward compatibility
+
+### v1.0 - Original Monolithic Version
+- Single file implementation
+- Mixed Turkish/English messages
+- Manual installation required
+- Available as `linux-ai-setup-script-legacy.sh`
+
+## Project Information
+
+- **Repository**: https://github.com/altudev/1453-wsl-bash-script
+- **Language**: Bash with Turkish interface
+- **Target Platform**: WSL (Windows Subsystem for Linux)
+- **Target Audience**: Turkish AI developers and "Vibe Coders"
+- **Installation Directory**: `~/.1453-wsl-setup/` (via installer)
+
+## What Gets Installed
+
+### Development Tools
+- Git configuration (interactive setup)
+- curl, wget, jq, zip, unzip, 7zip
+- Build essentials (gcc, make, etc.)
+
+### Python Ecosystem
+- Python 3.x
+- pip (with PEP 668 compliance)
+- pipx (isolated Python applications)
+- UV (ultra-fast Python package manager)
+
+### JavaScript Ecosystem
+- NVM (Node Version Manager)
+- Node.js LTS
+- npm
+- Bun.js
+
+### PHP Ecosystem
+- Multiple PHP versions (7.4, 8.1, 8.2, 8.3, 8.4, 8.5)
+- Composer
+- Laravel-ready PHP extensions
+
+### AI CLI Tools
+- Claude Code CLI
+- Gemini CLI (Google AI SDK)
+- Qwen CLI
+- OpenCode CLI
+- GitHub Copilot CLI
+- GitHub CLI
+
+### AI Frameworks
+- SuperGemini Framework
+- SuperQwen Framework
+- SuperClaude Framework
+- MCP server support for all frameworks
