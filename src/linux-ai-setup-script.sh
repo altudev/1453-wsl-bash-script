@@ -71,6 +71,20 @@ PHP_EXTENSION_PACKAGES=("mbstring" "zip" "gd" "tokenizer" "curl" "xml" "bcmath" 
 
 # Başlık
 clear
+
+# 1453 ASCII Art
+echo -e "${CYAN}"
+echo '   /$$ /$$   /$$ /$$$$$$$   /$$$$$$ '
+echo ' /$$$$| $$  | $$| $$____/  /$$__  $$'
+echo '|_  $$| $$  | $$| $$      |__/  \ $$'
+echo '  | $$| $$$$$$$$| $$$$$$$    /$$$$$$/'
+echo '  | $$|_____  $$|_____  $$  |___  $$'
+echo '  | $$      | $$ /$$  \ $$ /$$  \ $$'
+echo ' /$$$$$$    | $$|  $$$$$$/|  $$$$$$/'
+echo '|______/    |__/ \______/  \______/ '
+echo -e "${NC}"
+echo ""
+
 echo -e "${BLUE}╔════════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${BLUE}║   1453.AI - WSL Vibe Coder'lar İçin Otomatik Kurulum Rehberi   ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════════════════════════════╝${NC}\n"
