@@ -164,7 +164,13 @@ LAUNCHER
     # Kullanıcıya kurulum betiğini şimdi çalıştırmak isteyip istemediğini sor
     echo -e "${YELLOW}════════════════════════════════════════════════════════════════${NC}"
     echo -ne "${YELLOW}Kurulum betiğini şimdi çalıştırmak ister misiniz? (e/E=Evet, Enter=Hayır): ${NC}"
-    read -r response
+
+    # stdin'i terminal'e yönlendir (pipe'dan okuma sorunu için)
+    if [ -t 0 ]; then
+        read -r response
+    else
+        read -r response </dev/tty
+    fi
 
     if [[ "$response" =~ ^[eE]$ ]]; then
         echo ""
