@@ -25,7 +25,7 @@ show_banner() {
 
     # Script Information
     echo -e "${YELLOW}Script Sürümü:${NC} v2.0 Modular"
-    echo -e "${YELLOW}GitHub:${NC} https://github.com/1453h/wsl-bash-script"
+    echo -e "${YELLOW}GitHub:${NC} https://github.com/altudev/1453-wsl-bash-script"
     echo -e "${YELLOW}Tarih:${NC} $(date '+%Y-%m-%d %H:%M:%S')\n"
 }
 

@@ -2,7 +2,7 @@
 
 # 1453.AI WSL Vibe Coder'lar İçin Otomatik Kurulum Scripti
 # Version: 2.0 - Modular Architecture
-# GitHub: https://github.com/1453h/wsl-bash-script
+# GitHub: https://github.com/altudev/1453-wsl-bash-script
 
 # Get the directory where this script resides
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
