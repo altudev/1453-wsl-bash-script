@@ -90,6 +90,7 @@ main() {
         "src/modules/python.sh:Python ekosistemi"
         "src/modules/javascript.sh:JavaScript ekosistemi"
         "src/modules/php.sh:PHP ekosistemi"
+        "src/modules/go.sh:Go kurulum modülü"
         "src/modules/ai-cli.sh:AI CLI araçları"
         "src/modules/ai-frameworks.sh:AI framework'leri"
         "src/modules/menus.sh:Menü sistemi"
