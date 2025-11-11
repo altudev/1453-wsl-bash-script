@@ -1,6 +1,6 @@
 #!/bin/bash
 # Module: AI CLI Tools
-# Description: AI command-line tools installation functions
+# Description: AI command-line tools installation functions including Qoder CLI
 # Dependencies: lib/common.sh, lib/package-manager.sh, modules/javascript.sh
 
 # Install Claude Code CLI
